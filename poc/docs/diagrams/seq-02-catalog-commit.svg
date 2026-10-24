@@ -1,0 +1,60 @@
+<svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Sequence: atomic catalog commit via the REST catalog">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#202124"/>
+    </marker>
+    <marker id="grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6368"/>
+    </marker>
+  </defs>
+  <rect width="900" height="540" fill="#ffffff"/>
+  <text x="40" y="30" font-size="15" font-weight="700" fill="#202124">seq-02 · Catalog commit (the atomicity boundary)</text>
+
+  <g text-anchor="middle">
+    <rect x="95" y="42" width="150" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="170" y="58" font-size="9" font-style="italic" fill="#5f6368">«connector»</text>
+    <text x="170" y="77" font-size="12" font-weight="600" fill="#174ea6">Connect Sink</text>
+    <text x="170" y="93" font-size="9" fill="#5f6368">Iceberg sink</text>
+
+    <rect x="385" y="42" width="150" height="64" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text x="460" y="58" font-size="9" font-style="italic" fill="#5f6368">«catalog»</text>
+    <text x="460" y="77" font-size="12" font-weight="600" fill="#1e7e34">Polaris</text>
+    <text x="460" y="93" font-size="9" fill="#5f6368">Iceberg REST</text>
+
+    <rect x="675" y="42" width="150" height="64" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+    <text x="750" y="58" font-size="9" font-style="italic" fill="#5f6368">«metastore»</text>
+    <text x="750" y="77" font-size="12" font-weight="600" fill="#3c4043">PostgreSQL</text>
+    <text x="750" y="93" font-size="9" fill="#5f6368">Polaris persistence</text>
+  </g>
+
+  <g stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 4">
+    <line x1="170" y1="106" x2="170" y2="500"/>
+    <line x1="460" y1="106" x2="460" y2="500"/>
+    <line x1="750" y1="106" x2="750" y2="500"/>
+  </g>
+
+  <g stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="172" y1="150" x2="458" y2="150"/>
+    <line x1="460" y1="195" x2="748" y2="195"/>
+    <line x1="750" y1="240" x2="462" y2="240"/>
+    <line x1="460" y1="320" x2="748" y2="320"/>
+    <line x1="750" y1="365" x2="462" y2="365"/>
+    <line x1="460" y1="420" x2="172" y2="420"/>
+  </g>
+  <path d="M460,270 L515,270 L515,288 L462,288" fill="none" stroke="#5f6368" stroke-width="1.5" marker-end="url(#grey)"/>
+
+  <g font-size="11" fill="#202124">
+    <text x="182" y="142">1 · commit: POST table update + requirement (expected metadata-location)</text>
+    <text x="470" y="187">2 · read current pointer</text>
+    <text x="470" y="232" text-anchor="end">3 · current metadata-location</text>
+    <text x="520" y="278" fill="#5f6368">4 · optimistic check: is the requirement still valid?</text>
+    <text x="470" y="312">5 · write new pointer (atomic swap)</text>
+    <text x="470" y="357" text-anchor="end">6 · ok</text>
+    <text x="182" y="412" text-anchor="end">7 · 200 OK · new metadata-location (snapshot id)</text>
+  </g>
+
+  <rect x="95" y="444" width="730" height="70" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="112" y="468" font-size="11" fill="#202124">Step 4 is why concurrent writers are safe: a stale requirement fails and the writer retries.</text>
+  <text x="112" y="488" font-size="11" fill="#5f6368">Readers never see steps 1–5 — they see the old or the new pointer, never a partial write.</text>
+  <text x="112" y="506" font-size="11" fill="#5f6368">This is why the POC never edits Iceberg metadata directly.</text>
+</svg>

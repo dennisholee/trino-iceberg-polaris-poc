@@ -1,0 +1,69 @@
+<svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Sequence: replay and recovery with idempotent re-ingestion">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#202124"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text x="40" y="30" font-size="15" font-weight="700" fill="#202124">seq-05 · Replay &amp; recovery</text>
+
+  <g text-anchor="middle">
+    <rect x="30" y="42" width="130" height="64" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+    <text x="95" y="58" font-size="9" font-style="italic" fill="#5f6368">«actor»</text>
+    <text x="95" y="77" font-size="12" font-weight="600" fill="#3c4043">Operator</text>
+    <text x="95" y="93" font-size="9" fill="#5f6368">CLI</text>
+
+    <rect x="210" y="42" width="130" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="275" y="58" font-size="9" font-style="italic" fill="#5f6368">«control api»</text>
+    <text x="275" y="77" font-size="12" font-weight="600" fill="#174ea6">Connect REST</text>
+    <text x="275" y="93" font-size="9" fill="#5f6368">Kafka Connect</text>
+
+    <rect x="390" y="42" width="130" height="64" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+    <text x="455" y="58" font-size="9" font-style="italic" fill="#5f6368">«message broker»</text>
+    <text x="455" y="77" font-size="12" font-weight="600" fill="#3c4043">Kafka</text>
+    <text x="455" y="93" font-size="9" fill="#5f6368">KRaft</text>
+
+    <rect x="570" y="42" width="130" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="635" y="58" font-size="9" font-style="italic" fill="#5f6368">«connector»</text>
+    <text x="635" y="77" font-size="12" font-weight="600" fill="#174ea6">Sink</text>
+    <text x="635" y="93" font-size="9" fill="#5f6368">Iceberg sink</text>
+
+    <rect x="750" y="42" width="130" height="64" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text x="815" y="58" font-size="9" font-style="italic" fill="#5f6368">«store»</text>
+    <text x="815" y="77" font-size="12" font-weight="600" fill="#1e7e34">Iceberg tables</text>
+    <text x="815" y="93" font-size="9" fill="#5f6368">events · snapshot</text>
+  </g>
+
+  <g stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 4">
+    <line x1="95" y1="106" x2="95" y2="510"/>
+    <line x1="275" y1="106" x2="275" y2="510"/>
+    <line x1="455" y1="106" x2="455" y2="510"/>
+    <line x1="635" y1="106" x2="635" y2="510"/>
+    <line x1="815" y1="106" x2="815" y2="510"/>
+  </g>
+
+  <g stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="95" y1="150" x2="273" y2="150"/>
+    <line x1="275" y1="192" x2="633" y2="192"/>
+    <line x1="635" y1="234" x2="457" y2="234"/>
+    <line x1="455" y1="276" x2="633" y2="276"/>
+    <line x1="635" y1="356" x2="813" y2="356"/>
+    <line x1="815" y1="412" x2="637" y2="412"/>
+  </g>
+  <path d="M635,312 L690,312 L690,330 L637,330" fill="none" stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g font-size="11" fill="#202124">
+    <text x="107" y="142">1 · restart task / reset offsets</text>
+    <text x="285" y="184">2 · seek sink to offset N</text>
+    <text x="300" y="226" text-anchor="end">3 · poll from offset N</text>
+    <text x="465" y="268">4 · duplicate events re-delivered</text>
+    <text x="695" y="320" fill="#5f6368">5 · dedup guard (seq &gt; version / event_id)</text>
+    <text x="645" y="348">6 · write + commit (idempotent)</text>
+    <text x="645" y="404" text-anchor="end">7 · ok · no duplicate rows</text>
+  </g>
+
+  <rect x="30" y="436" width="850" height="76" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="47" y="460" font-size="11" fill="#202124">The event log is the source of truth: replay is always possible, and the fold is deterministic.</text>
+  <text x="47" y="480" font-size="11" fill="#5f6368">Re-delivery must not create duplicate rows — that is the idempotency objective (O3).</text>
+  <text x="47" y="500" font-size="11" fill="#5f6368">Repeated commits create extra snapshots; compaction/expiry is a later, non-POC concern.</text>
+</svg>

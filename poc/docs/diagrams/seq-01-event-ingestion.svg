@@ -1,0 +1,70 @@
+<svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Sequence: event ingestion through the Iceberg sink to a committed snapshot">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#202124"/>
+    </marker>
+  </defs>
+  <rect width="900" height="540" fill="#ffffff"/>
+  <text x="40" y="30" font-size="15" font-weight="700" fill="#202124">seq-01 · Event ingestion</text>
+
+  <g text-anchor="middle">
+    <rect x="45" y="42" width="130" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="110" y="58" font-size="9" font-style="italic" fill="#5f6368">«actor»</text>
+    <text x="110" y="77" font-size="12" font-weight="600" fill="#174ea6">Producer</text>
+    <text x="110" y="93" font-size="9" fill="#5f6368">Event Hub (simulated)</text>
+
+    <rect x="215" y="42" width="130" height="64" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+    <text x="280" y="58" font-size="9" font-style="italic" fill="#5f6368">«message broker»</text>
+    <text x="280" y="77" font-size="12" font-weight="600" fill="#3c4043">Kafka</text>
+    <text x="280" y="93" font-size="9" fill="#5f6368">KRaft</text>
+
+    <rect x="385" y="42" width="130" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="450" y="58" font-size="9" font-style="italic" fill="#5f6368">«connector»</text>
+    <text x="450" y="77" font-size="12" font-weight="600" fill="#174ea6">Connect Sink</text>
+    <text x="450" y="93" font-size="9" fill="#5f6368">Iceberg sink</text>
+
+    <rect x="555" y="42" width="130" height="64" rx="8" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+    <text x="620" y="58" font-size="9" font-style="italic" fill="#5f6368">«object store»</text>
+    <text x="620" y="77" font-size="12" font-weight="600" fill="#8a5a00">MinIO</text>
+    <text x="620" y="93" font-size="9" fill="#5f6368">S3 API</text>
+
+    <rect x="725" y="42" width="130" height="64" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text x="790" y="58" font-size="9" font-style="italic" fill="#5f6368">«catalog»</text>
+    <text x="790" y="77" font-size="12" font-weight="600" fill="#1e7e34">Polaris</text>
+    <text x="790" y="93" font-size="9" fill="#5f6368">Iceberg REST</text>
+  </g>
+
+  <g stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 4">
+    <line x1="110" y1="106" x2="110" y2="510"/>
+    <line x1="280" y1="106" x2="280" y2="510"/>
+    <line x1="450" y1="106" x2="450" y2="510"/>
+    <line x1="620" y1="106" x2="620" y2="510"/>
+    <line x1="790" y1="106" x2="790" y2="510"/>
+  </g>
+
+  <g stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="110" y1="150" x2="278" y2="150"/>
+    <line x1="280" y1="190" x2="448" y2="190"/>
+    <line x1="450" y1="262" x2="618" y2="262"/>
+    <line x1="450" y1="302" x2="618" y2="302"/>
+    <line x1="450" y1="352" x2="788" y2="352"/>
+    <line x1="790" y1="392" x2="452" y2="392"/>
+    <line x1="450" y1="432" x2="282" y2="432"/>
+  </g>
+  <path d="M450,216 L500,216 L500,234 L452,234" fill="none" stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g font-size="11" fill="#202124">
+    <text x="120" y="142">1 · publish(event JSON, key = aggregate_id)</text>
+    <text x="290" y="182">2 · poll records</text>
+    <text x="510" y="224" fill="#5f6368">3 · buffer; flush on commit interval</text>
+    <text x="460" y="254">4 · PUT data.parquet</text>
+    <text x="460" y="294">5 · PUT manifests + metadata.json</text>
+    <text x="460" y="344">6 · commit (swap current metadata pointer)</text>
+    <text x="470" y="384" text-anchor="end">7 · 200 OK · new snapshot id</text>
+    <text x="290" y="424" text-anchor="end">8 · commit consumer offsets</text>
+  </g>
+
+  <rect x="45" y="452" width="810" height="52" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="62" y="476" font-size="11" fill="#202124">Atomicity note: steps 4–5 write files, but the table only becomes new at step 6 (the catalog pointer swap).</text>
+  <text x="62" y="494" font-size="11" fill="#5f6368">Trino sees the new snapshot after the commit plus its metadata cache TTL.</text>
+</svg>

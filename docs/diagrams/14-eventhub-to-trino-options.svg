@@ -1,0 +1,60 @@
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Event Hub to Trino integration options grouped by family">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6368"/>
+    </marker>
+  </defs>
+  <rect width="960" height="600" fill="#ffffff"/>
+  <text x="480" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#202124">Options: Event Hub → Trino</text>
+
+  <rect x="30" y="258" width="150" height="84" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="105" y="292" text-anchor="middle" font-size="13" font-weight="700" fill="#174ea6">Event Hub</text>
+  <text x="105" y="312" text-anchor="middle" font-size="10" fill="#5f6368">Kafka · REST</text>
+
+  <rect x="800" y="228" width="130" height="150" rx="12" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="865" y="298" text-anchor="middle" font-size="14" font-weight="700" fill="#174ea6">TRINO</text>
+  <text x="865" y="318" text-anchor="middle" font-size="10" fill="#5f6368">the constant</text>
+
+  <g fill="none" stroke="#5f6368" stroke-width="1.5">
+    <path d="M180,300 L205,300 L205,81 L226,81" marker-end="url(#arrow)"/>
+    <path d="M180,300 L205,300 L205,174 L226,174" marker-end="url(#arrow)"/>
+    <path d="M180,300 L226,301" marker-end="url(#arrow)"/>
+    <path d="M180,300 L205,300 L205,462 L226,462" marker-end="url(#arrow)"/>
+    <path d="M750,81 L775,81 L775,240 L798,240" marker-end="url(#arrow)"/>
+    <path d="M750,174 L775,174 L775,270 L798,270" marker-end="url(#arrow)"/>
+    <path d="M750,301 L798,305" marker-end="url(#arrow)"/>
+    <path d="M750,462 L775,462 L775,350 L798,350" marker-end="url(#arrow)"/>
+  </g>
+
+  <rect x="230" y="50" width="520" height="62" rx="10" fill="#f1f3f4" stroke="#9aa0a6"/>
+  <text x="246" y="70" font-size="11" font-weight="700" fill="#3c4043" letter-spacing="1">LIVE</text>
+  <rect x="246" y="80" width="488" height="26" rx="6" fill="#ffffff" stroke="#9aa0a6"/>
+  <text x="258" y="98" font-size="11" fill="#202124">1 · Live Kafka topics</text>
+
+  <rect x="230" y="126" width="520" height="96" rx="10" fill="#fef7e0" stroke="#f9ab00"/>
+  <text x="246" y="146" font-size="11" font-weight="700" fill="#8a5a00" letter-spacing="1">LANDED</text>
+  <rect x="246" y="156" width="488" height="26" rx="6" fill="#ffffff" stroke="#f9ab00"/>
+  <text x="258" y="174" font-size="11" fill="#202124">2 · Raw files on object storage</text>
+  <rect x="246" y="190" width="488" height="26" rx="6" fill="#ffffff" stroke="#f9ab00"/>
+  <text x="258" y="208" font-size="11" fill="#202124">3 · Iceberg event log</text>
+
+  <rect x="230" y="236" width="520" height="130" rx="10" fill="#e6f4ea" stroke="#34a853"/>
+  <text x="246" y="256" font-size="11" font-weight="700" fill="#1e7e34" letter-spacing="1">MATERIALISED</text>
+  <rect x="246" y="266" width="488" height="26" rx="6" fill="#ffffff" stroke="#34a853"/>
+  <text x="258" y="284" font-size="11" fill="#202124">4a · BigQuery staging → Iceberg</text>
+  <rect x="246" y="300" width="488" height="26" rx="6" fill="#ffffff" stroke="#34a853"/>
+  <text x="258" y="318" font-size="11" fill="#202124">4 · Iceberg aggregate snapshot</text>
+  <rect x="246" y="334" width="488" height="26" rx="6" fill="#ffffff" stroke="#34a853"/>
+  <text x="258" y="352" font-size="11" fill="#202124">8 · On-read aggregation</text>
+
+  <rect x="230" y="380" width="520" height="164" rx="10" fill="#e8f0fe" stroke="#1a73e8"/>
+  <text x="246" y="400" font-size="11" font-weight="700" fill="#174ea6" letter-spacing="1">SERVING</text>
+  <rect x="246" y="410" width="488" height="26" rx="6" fill="#ffffff" stroke="#1a73e8"/>
+  <text x="258" y="428" font-size="11" fill="#202124">5 · BigQuery as target</text>
+  <rect x="246" y="444" width="488" height="26" rx="6" fill="#ffffff" stroke="#1a73e8"/>
+  <text x="258" y="462" font-size="11" fill="#202124">6 · BigQuery managed Iceberg</text>
+  <rect x="246" y="478" width="488" height="26" rx="6" fill="#ffffff" stroke="#1a73e8"/>
+  <text x="258" y="496" font-size="11" fill="#202124">7 · Hot serving store (Pinot / Druid / ClickHouse)</text>
+  <rect x="246" y="512" width="488" height="26" rx="6" fill="#ffffff" stroke="#1a73e8"/>
+  <text x="258" y="530" font-size="11" fill="#202124">9 · Relational landing (Postgres / MySQL)</text>
+</svg>

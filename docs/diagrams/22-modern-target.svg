@@ -1,0 +1,55 @@
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Modern target: managed hop and managed Iceberg, federated by Trino with an optional hot view">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#202124"/>
+    </marker>
+  </defs>
+  <rect width="900" height="420" fill="#ffffff"/>
+  <text x="40" y="30" font-size="15" font-weight="700" fill="#202124">The modern target</text>
+
+  <g text-anchor="middle">
+    <rect x="40" y="140" width="140" height="80" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="110" y="162" font-size="9" font-style="italic" fill="#5f6368">«external system»</text>
+    <text x="110" y="182" font-size="12" font-weight="600" fill="#174ea6">Event Hub</text>
+    <text x="110" y="200" font-size="9" fill="#5f6368">domain events</text>
+
+    <rect x="210" y="140" width="170" height="80" rx="10" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+    <text x="295" y="162" font-size="9" font-style="italic" fill="#5f6368">«connector»</text>
+    <text x="295" y="182" font-size="12" font-weight="600" fill="#8a5a00">Tableflow · Redpanda</text>
+    <text x="295" y="200" font-size="9" fill="#5f6368">managed Kafka → Iceberg</text>
+
+    <rect x="410" y="140" width="190" height="80" rx="10" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text x="505" y="162" font-size="9" font-style="italic" fill="#5f6368">«catalog · store»</text>
+    <text x="505" y="182" font-size="12" font-weight="600" fill="#1e7e34">S3 Tables</text>
+    <text x="505" y="200" font-size="9" fill="#5f6368">managed Iceberg + auto-compaction</text>
+
+    <rect x="650" y="100" width="200" height="64" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="750" y="122" font-size="9" font-style="italic" fill="#5f6368">«query engine»</text>
+    <text x="750" y="142" font-size="12" font-weight="600" fill="#174ea6">Trino</text>
+    <text x="750" y="158" font-size="9" fill="#5f6368">federator — the constant</text>
+
+    <rect x="650" y="196" width="200" height="64" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2" stroke-dasharray="5 4"/>
+    <text x="750" y="218" font-size="9" font-style="italic" fill="#5f6368">«store»</text>
+    <text x="750" y="238" font-size="12" font-weight="600" fill="#174ea6">ClickHouse</text>
+    <text x="750" y="254" font-size="9" fill="#5f6368">hot view (optional)</text>
+  </g>
+
+  <g fill="none" stroke="#202124" stroke-width="1.5">
+    <line x1="180" y1="180" x2="208" y2="180" marker-end="url(#arrow)"/>
+    <line x1="380" y1="180" x2="408" y2="180" marker-end="url(#arrow)"/>
+    <path d="M600,168 L625,168 L625,132 L648,132" marker-end="url(#arrow)"/>
+    <path d="M600,192 L625,192 L625,228 L648,228" marker-end="url(#arrow)"/>
+  </g>
+
+  <rect x="40" y="310" width="400" height="72" rx="10" fill="#e6f4ea" stroke="#34a853"/>
+  <text x="58" y="336" font-size="11" font-weight="700" fill="#1e7e34">KEEP</text>
+  <text x="58" y="356" font-size="10" fill="#5f6368">event contract · fold (SQL) · Iceberg format</text>
+  <text x="58" y="372" font-size="10" fill="#5f6368">Trino — the only engine you operate</text>
+
+  <rect x="460" y="310" width="400" height="72" rx="10" fill="#fce8e6" stroke="#d93025"/>
+  <text x="478" y="336" font-size="11" font-weight="700" fill="#a50e0e">DROP</text>
+  <text x="478" y="356" font-size="10" fill="#5f6368">Polaris · Postgres · MinIO · Connect worker</text>
+  <text x="478" y="372" font-size="10" fill="#5f6368">manual compaction / snapshot expiry</text>
+
+  <text x="40" y="408" font-size="11" fill="#5f6368">Essentially the baseline architecture — minus the parts you have to operate.</text>
+</svg>

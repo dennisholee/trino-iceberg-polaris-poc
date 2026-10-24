@@ -1,0 +1,52 @@
+<svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Use case F: near-real-time aggregate snapshot">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6368"/>
+    </marker>
+    <marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34a853"/>
+    </marker>
+    <marker id="amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#f9ab00"/>
+    </marker>
+  </defs>
+  <rect width="900" height="380" fill="#ffffff"/>
+  <text x="40" y="34" font-size="16" font-weight="700" fill="#202124">UC-F · Near-real-time aggregate snapshot</text>
+
+  <g font-size="12" text-anchor="middle">
+    <rect x="30" y="110" width="120" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="90" y="142" font-weight="600" fill="#174ea6">Event Hub</text>
+    <text x="90" y="160" font-size="10" fill="#5f6368">Kafka</text>
+
+    <rect x="170" y="110" width="100" height="76" rx="10" fill="#f1f3f4" stroke="#9aa0a6"/>
+    <text x="220" y="152" font-weight="600" fill="#3c4043">Kafka</text>
+
+    <rect x="290" y="110" width="160" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8"/>
+    <text x="370" y="142" font-weight="600" fill="#174ea6">streaming fold</text>
+    <text x="370" y="160" font-size="10" fill="#5f6368">Flink / Spark</text>
+
+    <rect x="470" y="110" width="150" height="76" rx="10" fill="#e6f4ea" stroke="#34a853"/>
+    <text x="545" y="142" font-weight="600" fill="#1e7e34">Iceberg snapshot</text>
+    <text x="545" y="160" font-size="10" fill="#5f6368">upsert (gold)</text>
+
+    <rect x="640" y="110" width="120" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="700" y="152" font-weight="600" fill="#174ea6">Trino</text>
+
+    <rect x="280" y="252" width="200" height="64" rx="10" fill="#fef7e0" stroke="#f9ab00" stroke-dasharray="5 4"/>
+    <text x="380" y="280" font-weight="600" fill="#8a5a00">hot serving store</text>
+    <text x="380" y="298" font-size="10" fill="#5f6368">only if sub-second</text>
+  </g>
+
+  <g stroke="#5f6368" stroke-width="1.5">
+    <line x1="150" y1="148" x2="168" y2="148" marker-end="url(#arrow)"/>
+    <line x1="270" y1="148" x2="288" y2="148" marker-end="url(#arrow)"/>
+    <line x1="620" y1="148" x2="638" y2="148" marker-end="url(#arrow)"/>
+  </g>
+  <line x1="450" y1="148" x2="468" y2="148" stroke="#34a853" stroke-width="2.5" marker-end="url(#green)"/>
+  <text x="459" y="132" text-anchor="middle" font-size="9" fill="#1e7e34">upsert</text>
+
+  <line x1="380" y1="186" x2="380" y2="250" stroke="#f9ab00" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#amber)"/>
+
+  <text x="40" y="346" font-size="11" fill="#5f6368">Staleness is bounded by the commit interval plus the Trino metadata cache TTL.</text>
+  <text x="40" y="368" font-size="11" fill="#5f6368">Streaming adds a runtime and continuous compaction; add the hot store only for sub-second reads.</text>
+</svg>

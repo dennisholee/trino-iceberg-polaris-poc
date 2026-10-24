@@ -1,0 +1,21 @@
+{
+  "asset_id": "GET /v1/orders/{correlationId}",
+  "contract_version": "orders-api-v1",
+  "row_count_min": 1,
+  "columns": [
+    {
+      "name": "orderId",
+      "not_null": true,
+      "unique": true
+    },
+    {
+      "name": "status",
+      "not_null": true,
+      "in_set": ["OrderCreated", "Paid", "Shipped", "Delivered", "Closed", "Archived"]
+    },
+    {
+      "name": "total",
+      "between": [0, 1000000]
+    }
+  ]
+}

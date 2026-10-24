@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: POC Operational API
+  version: orders-api-v1
+  description: Aggregate read model for the POC. The Spring gate enforces DQ before returning.
+
+servers:
+  - url: http://localhost:8082
+
+paths:
+  /v1/orders/{correlationId}:
+    get:
+      operationId: getOrdersByCorrelation
+      summary: Return the order snapshot for a business transaction
+      parameters:
+        - name: correlationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: DQ passed or warned
+          headers:
+            X-DQ-Status:
+              schema: { type: string, enum: [pass, warn] }
+            X-DQ-Run-Id:
+              schema: { type: string }
+            X-Contract-Version:
+              schema: { type: string }
+            X-Data-Freshness:
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '503':
+          description: DQ failed or unknown on a critical endpoint
+          headers:
+            X-DQ-Status:
+              schema: { type: string, enum: [fail, unknown, stale] }
+            X-DQ-Run-Id:
+              schema: { type: string }
+            X-Contract-Version:
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DqProblem'
+
+components:
+  schemas:
+    Order:
+      type: object
+      required: [orderId, status]
+      properties:
+        orderId:
+          type: string
+        status:
+          type: string
+          enum: [OrderCreated, Paid, Shipped, Delivered, Closed, Archived]
+        total:
+          type: number
+          nullable: true
+        lastEventAt:
+          type: string
+          format: date-time
+          nullable: true
+    OrderResponse:
+      type: object
+      required: [correlationId, orders]
+      properties:
+        correlationId:
+          type: string
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+    DqProblem:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        failures:
+          type: array
+          items:
+            type: string

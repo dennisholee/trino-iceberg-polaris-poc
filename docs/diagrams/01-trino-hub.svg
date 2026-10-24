@@ -1,0 +1,59 @@
+<svg viewBox="0 0 960 400" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Trino as the constant aggregation layer over four source catalogs">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6368"/>
+    </marker>
+  </defs>
+  <rect width="960" height="400" fill="#ffffff"/>
+
+  <rect x="330" y="22" width="300" height="60" rx="12" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="480" y="48" text-anchor="middle" font-size="17" font-weight="700" fill="#174ea6">TRINO — aggregation layer</text>
+  <text x="480" y="68" text-anchor="middle" font-size="11" fill="#5f6368">one dialect · one auth · federated joins</text>
+
+  <g fill="none" stroke="#5f6368" stroke-width="1.5">
+    <path d="M480,82 L480,104 L135,104 L135,138" marker-end="url(#arrow)"/>
+    <path d="M480,82 L480,104 L365,104 L365,138" marker-end="url(#arrow)"/>
+    <path d="M480,82 L480,104 L595,104 L595,138" marker-end="url(#arrow)"/>
+    <path d="M480,82 L480,104 L825,104 L825,138" marker-end="url(#arrow)"/>
+  </g>
+
+  <g font-size="12" font-weight="600" fill="#202124" text-anchor="middle">
+    <rect x="40" y="140" width="190" height="36" rx="8" fill="#f1f3f4" stroke="#9aa0a6"/>
+    <text x="135" y="163">catalog: duckdb</text>
+    <rect x="270" y="140" width="190" height="36" rx="8" fill="#f1f3f4" stroke="#9aa0a6"/>
+    <text x="365" y="163">catalog: bigquery</text>
+    <rect x="500" y="140" width="190" height="36" rx="8" fill="#f1f3f4" stroke="#9aa0a6"/>
+    <text x="595" y="163">catalog: hive</text>
+    <rect x="730" y="140" width="190" height="36" rx="8" fill="#e6f4ea" stroke="#34a853"/>
+    <text x="825" y="163">catalog: iceberg</text>
+  </g>
+
+  <g stroke="#5f6368" stroke-width="1.5">
+    <line x1="135" y1="176" x2="135" y2="224" marker-end="url(#arrow)"/>
+    <line x1="365" y1="176" x2="365" y2="224" marker-end="url(#arrow)"/>
+    <line x1="595" y1="176" x2="595" y2="224" marker-end="url(#arrow)"/>
+    <line x1="825" y1="176" x2="825" y2="224" marker-end="url(#arrow)"/>
+  </g>
+
+  <g font-size="11" text-anchor="middle" fill="#202124">
+    <rect x="40" y="226" width="190" height="74" rx="10" fill="#f8f9fa" stroke="#9aa0a6"/>
+    <text x="135" y="250" font-size="12" font-weight="600">DuckDB</text>
+    <text x="135" y="269">.duckdb file</text>
+    <text x="135" y="286" fill="#5f6368">(shared filesystem)</text>
+
+    <rect x="270" y="226" width="190" height="74" rx="10" fill="#e8f0fe" stroke="#1a73e8"/>
+    <text x="365" y="250" font-size="12" font-weight="600">BigQuery</text>
+    <text x="365" y="269">Colossus</text>
+    <text x="365" y="286" fill="#5f6368">(Google-managed)</text>
+
+    <rect x="500" y="226" width="190" height="74" rx="10" fill="#fef7e0" stroke="#f9ab00"/>
+    <text x="595" y="250" font-size="12" font-weight="600">Blob + Schema Reg.</text>
+    <text x="595" y="269">raw files</text>
+    <text x="595" y="286" fill="#5f6368">(Parquet / CSV / JSON)</text>
+
+    <rect x="730" y="226" width="190" height="74" rx="10" fill="#e6f4ea" stroke="#34a853"/>
+    <text x="825" y="250" font-size="12" font-weight="600">Iceberg + Polaris</text>
+    <text x="825" y="269">files on your bucket</text>
+    <text x="825" y="286" fill="#5f6368">(open · ACID)</text>
+  </g>
+</svg>

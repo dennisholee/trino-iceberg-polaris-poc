@@ -1,0 +1,34 @@
+{
+  "name": "iceberg-events-sink",
+  "config": {
+    "connector.class": "org.apache.iceberg.connect.IcebergSinkConnector",
+    "tasks.max": "1",
+    "topics": "domain-events",
+
+    "iceberg.tables": "poc.events_kafka",
+    "iceberg.tables.auto-create-enabled": "true",
+    "iceberg.tables.evolve-schema-enabled": "true",
+
+    "iceberg.catalog": "iceberg",
+    "iceberg.catalog.type": "rest",
+    "iceberg.catalog.uri": "http://polaris:8181/api/catalog",
+    "iceberg.catalog.warehouse": "poc",
+    "iceberg.catalog.credential": "root:secret",
+    "iceberg.catalog.scope": "PRINCIPAL_ROLE:ALL",
+    "iceberg.catalog.rest-metrics-reporting-enabled": "false",
+
+    "iceberg.catalog.io-impl": "org.apache.iceberg.aws.s3.S3FileIO",
+    "iceberg.catalog.s3.endpoint": "http://minio:9000",
+    "iceberg.catalog.s3.path-style-access": "true",
+    "iceberg.catalog.s3.region": "us-east-1",
+
+    "iceberg.control.topic": "control-iceberg",
+    "iceberg.control.commit.interval-ms": "15000",
+
+    "transforms": "jsonToMap",
+    "transforms.jsonToMap.type": "org.apache.iceberg.connect.transforms.JsonToMapTransform",
+
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.storage.StringConverter"
+  }
+}

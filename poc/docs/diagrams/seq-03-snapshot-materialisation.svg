@@ -1,0 +1,66 @@
+<svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Sequence: snapshot materialisation by a scheduled SQL fold">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#202124"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text x="40" y="30" font-size="15" font-weight="700" fill="#202124">seq-03 · Snapshot materialisation</text>
+
+  <g text-anchor="middle">
+    <rect x="55" y="42" width="130" height="64" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+    <text x="120" y="58" font-size="9" font-style="italic" fill="#5f6368">«scheduler»</text>
+    <text x="120" y="77" font-size="12" font-weight="600" fill="#3c4043">cron</text>
+    <text x="120" y="93" font-size="9" fill="#5f6368">scheduled query</text>
+
+    <rect x="265" y="42" width="130" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="330" y="58" font-size="9" font-style="italic" fill="#5f6368">«query engine»</text>
+    <text x="330" y="77" font-size="12" font-weight="600" fill="#174ea6">Trino</text>
+    <text x="330" y="93" font-size="9" fill="#5f6368">Iceberg connector</text>
+
+    <rect x="475" y="42" width="130" height="64" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text x="540" y="58" font-size="9" font-style="italic" fill="#5f6368">«catalog»</text>
+    <text x="540" y="77" font-size="12" font-weight="600" fill="#1e7e34">Polaris</text>
+    <text x="540" y="93" font-size="9" fill="#5f6368">Iceberg REST</text>
+
+    <rect x="685" y="42" width="130" height="64" rx="8" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+    <text x="750" y="58" font-size="9" font-style="italic" fill="#5f6368">«object store»</text>
+    <text x="750" y="77" font-size="12" font-weight="600" fill="#8a5a00">MinIO</text>
+    <text x="750" y="93" font-size="9" fill="#5f6368">S3 API</text>
+  </g>
+
+  <g stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 4">
+    <line x1="120" y1="106" x2="120" y2="510"/>
+    <line x1="330" y1="106" x2="330" y2="510"/>
+    <line x1="540" y1="106" x2="540" y2="510"/>
+    <line x1="750" y1="106" x2="750" y2="510"/>
+  </g>
+
+  <g stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="120" y1="150" x2="328" y2="150"/>
+    <line x1="330" y1="190" x2="538" y2="190"/>
+    <line x1="540" y1="230" x2="332" y2="230"/>
+    <line x1="330" y1="270" x2="748" y2="270"/>
+    <line x1="750" y1="310" x2="332" y2="310"/>
+    <line x1="330" y1="370" x2="748" y2="370"/>
+    <line x1="330" y1="410" x2="538" y2="410"/>
+    <line x1="540" y1="450" x2="332" y2="450"/>
+  </g>
+  <path d="M330,328 L385,328 L385,346 L332,346" fill="none" stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g font-size="11" fill="#202124">
+    <text x="132" y="142">1 · run MERGE (scheduled)</text>
+    <text x="340" y="182">2 · load table metadata</text>
+    <text x="340" y="222" text-anchor="end">3 · current snapshot + manifest list</text>
+    <text x="340" y="262">4 · read manifests + Parquet (pruned)</text>
+    <text x="340" y="302" text-anchor="end">5 · rows</text>
+    <text x="390" y="338" fill="#5f6368">6 · fold; apply only seq &gt; version</text>
+    <text x="340" y="362">7 · write new snapshot data files</text>
+    <text x="340" y="402">8 · commit snapshot_order</text>
+    <text x="340" y="442" text-anchor="end">9 · new snapshot id</text>
+  </g>
+
+  <rect x="55" y="474" width="800" height="60" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="72" y="498" font-size="11" fill="#202124">The fold is idempotent: re-running the MERGE produces the same snapshot rows.</text>
+  <text x="72" y="518" font-size="11" fill="#5f6368">S2 pattern — no streaming runtime; the event log remains the source of truth.</text>
+</svg>

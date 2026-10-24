@@ -1,0 +1,47 @@
+<svg viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="BigQuery as an intermediate staging stage between Event Hub and Iceberg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6368"/>
+    </marker>
+    <marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34a853"/>
+    </marker>
+  </defs>
+  <rect width="900" height="340" fill="#ffffff"/>
+  <text x="40" y="34" font-size="16" font-weight="700" fill="#202124">BigQuery as an intermediate stage</text>
+
+  <g text-anchor="middle">
+    <rect x="30" y="120" width="120" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="90" y="152" font-size="12" font-weight="600" fill="#174ea6">Event Hub</text>
+    <text x="90" y="170" font-size="10" fill="#5f6368">Kafka</text>
+
+    <rect x="170" y="120" width="100" height="76" rx="10" fill="#f1f3f4" stroke="#9aa0a6"/>
+    <text x="220" y="162" font-size="12" font-weight="600" fill="#3c4043">Kafka</text>
+
+    <rect x="290" y="120" width="170" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="375" y="150" font-size="12" font-weight="600" fill="#174ea6">BigQuery staging</text>
+    <text x="375" y="168" font-size="10" fill="#5f6368">raw events · SQL</text>
+    <text x="375" y="184" font-size="10" fill="#5f6368">S-BQ-1 / 2 / 3</text>
+
+    <rect x="560" y="120" width="150" height="76" rx="10" fill="#e6f4ea" stroke="#34a853"/>
+    <text x="635" y="150" font-size="12" font-weight="600" fill="#1e7e34">Iceberg serving</text>
+    <text x="635" y="168" font-size="10" fill="#5f6368">(gold)</text>
+
+    <rect x="740" y="120" width="120" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="800" y="162" font-size="12" font-weight="600" fill="#174ea6">Trino</text>
+  </g>
+
+  <g stroke="#5f6368" stroke-width="1.5">
+    <line x1="150" y1="158" x2="168" y2="158" marker-end="url(#arrow)"/>
+    <line x1="270" y1="158" x2="288" y2="158" marker-end="url(#arrow)"/>
+    <line x1="710" y1="158" x2="738" y2="158" marker-end="url(#arrow)"/>
+  </g>
+  <line x1="460" y1="158" x2="558" y2="158" stroke="#34a853" stroke-width="2.5" marker-end="url(#green)"/>
+  <text x="509" y="140" text-anchor="middle" font-size="11" font-weight="600" fill="#1e7e34">fold + handoff</text>
+  <text x="509" y="180" text-anchor="middle" font-size="10" fill="#5f6368">Trino INSERT…SELECT</text>
+  <text x="509" y="196" text-anchor="middle" font-size="10" fill="#5f6368">or EXPORT DATA → register</text>
+
+  <text x="40" y="262" font-size="11" fill="#5f6368">BigQuery absorbs the stream (native ingest) and does heavy SQL staging.</text>
+  <text x="40" y="284" font-size="11" fill="#5f6368">Iceberg stays the open serving tier — that is what keeps Trino the constant.</text>
+  <text x="40" y="306" font-size="11" fill="#5f6368">Trade-off: an extra hop, a second system, and schema translation between them.</text>
+</svg>

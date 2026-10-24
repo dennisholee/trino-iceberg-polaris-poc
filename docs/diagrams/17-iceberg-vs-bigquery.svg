@@ -1,0 +1,50 @@
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Iceberg versus BigQuery as the target">
+  <rect width="900" height="400" fill="#ffffff"/>
+  <text x="40" y="34" font-size="16" font-weight="700" fill="#202124">Iceberg vs BigQuery as the target</text>
+
+  <rect x="40" y="60" width="330" height="44" rx="10" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+  <text x="205" y="88" text-anchor="middle" font-size="13" font-weight="700" fill="#1e7e34">Iceberg + Polaris</text>
+
+  <rect x="380" y="60" width="140" height="44" rx="10" fill="#f8f9fa" stroke="#9aa0a6"/>
+  <text x="450" y="88" text-anchor="middle" font-size="12" font-weight="700" fill="#5f6368">Dimension</text>
+
+  <rect x="530" y="60" width="330" height="44" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="695" y="88" text-anchor="middle" font-size="13" font-weight="700" fill="#174ea6">BigQuery</text>
+
+  <g font-size="11">
+    <rect x="380" y="112" width="140" height="44" rx="8" fill="#f8f9fa" stroke="#9aa0a6"/>
+    <text x="450" y="139" text-anchor="middle" font-weight="600" fill="#3c4043">Storage</text>
+    <rect x="40" y="112" width="330" height="44" rx="8" fill="#ffffff" stroke="#34a853"/>
+    <text x="56" y="139" fill="#202124">your bucket · open</text>
+    <rect x="530" y="112" width="330" height="44" rx="8" fill="#ffffff" stroke="#1a73e8"/>
+    <text x="546" y="139" fill="#202124">Google-managed · closed</text>
+
+    <rect x="380" y="160" width="140" height="44" rx="8" fill="#f8f9fa" stroke="#9aa0a6"/>
+    <text x="450" y="187" text-anchor="middle" font-weight="600" fill="#3c4043">Trino's role</text>
+    <rect x="40" y="160" width="330" height="44" rx="8" fill="#ffffff" stroke="#34a853"/>
+    <text x="56" y="187" fill="#202124">the fabric</text>
+    <rect x="530" y="160" width="330" height="44" rx="8" fill="#ffffff" stroke="#1a73e8"/>
+    <text x="546" y="187" fill="#202124">secondary / federation</text>
+
+    <rect x="380" y="208" width="140" height="44" rx="8" fill="#f8f9fa" stroke="#9aa0a6"/>
+    <text x="450" y="235" text-anchor="middle" font-weight="600" fill="#3c4043">Near-real-time</text>
+    <rect x="40" y="208" width="330" height="44" rx="8" fill="#ffffff" stroke="#34a853"/>
+    <text x="56" y="235" fill="#202124">BYO streaming engine</text>
+    <rect x="530" y="208" width="330" height="44" rx="8" fill="#ffffff" stroke="#1a73e8"/>
+    <text x="546" y="235" fill="#202124">native (Write API + continuous queries)</text>
+
+    <rect x="380" y="256" width="140" height="44" rx="8" fill="#f8f9fa" stroke="#9aa0a6"/>
+    <text x="450" y="283" text-anchor="middle" font-weight="600" fill="#3c4043">Ops</text>
+    <rect x="40" y="256" width="330" height="44" rx="8" fill="#ffffff" stroke="#34a853"/>
+    <text x="56" y="283" fill="#202124">you own compaction</text>
+    <rect x="530" y="256" width="330" height="44" rx="8" fill="#ffffff" stroke="#1a73e8"/>
+    <text x="546" y="283" fill="#202124">fully managed</text>
+
+    <rect x="380" y="304" width="140" height="44" rx="8" fill="#f8f9fa" stroke="#9aa0a6"/>
+    <text x="450" y="331" text-anchor="middle" font-weight="600" fill="#3c4043">Lock-in</text>
+    <rect x="40" y="304" width="330" height="44" rx="8" fill="#ffffff" stroke="#34a853"/>
+    <text x="56" y="331" fill="#202124">lowest</text>
+    <rect x="530" y="304" width="330" height="44" rx="8" fill="#ffffff" stroke="#1a73e8"/>
+    <text x="546" y="331" fill="#202124">high</text>
+  </g>
+</svg>

@@ -1,0 +1,73 @@
+<svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Sequence: Gravitino federates Kafka and Polaris metadata without copying it">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#202124"/>
+    </marker>
+  </defs>
+  <rect width="900" height="540" fill="#ffffff"/>
+  <text x="40" y="30" font-size="15" font-weight="700" fill="#202124">seq-06 · Metadata federation (POC v2)</text>
+
+  <g text-anchor="middle">
+    <rect x="20" y="42" width="120" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="80" y="58" font-size="9" font-style="italic" fill="#5f6368">«actor»</text>
+    <text x="80" y="77" font-size="12" font-weight="600" fill="#174ea6">Operator</text>
+    <text x="80" y="93" font-size="9" fill="#5f6368">bootstrap</text>
+
+    <rect x="170" y="42" width="120" height="64" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text x="230" y="58" font-size="9" font-style="italic" fill="#5f6368">«metadata lake»</text>
+    <text x="230" y="77" font-size="12" font-weight="600" fill="#1e7e34">Gravitino</text>
+    <text x="230" y="93" font-size="9" fill="#5f6368">REST</text>
+
+    <rect x="320" y="42" width="120" height="64" rx="8" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+    <text x="380" y="58" font-size="9" font-style="italic" fill="#5f6368">«message broker»</text>
+    <text x="380" y="77" font-size="12" font-weight="600" fill="#3c4043">Kafka</text>
+    <text x="380" y="93" font-size="9" fill="#5f6368">domain-events</text>
+
+    <rect x="470" y="42" width="120" height="64" rx="8" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text x="530" y="58" font-size="9" font-style="italic" fill="#5f6368">«catalog»</text>
+    <text x="530" y="77" font-size="12" font-weight="600" fill="#1e7e34">Polaris</text>
+    <text x="530" y="93" font-size="9" fill="#5f6368">Iceberg REST</text>
+
+    <rect x="620" y="42" width="120" height="64" rx="8" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+    <text x="680" y="58" font-size="9" font-style="italic" fill="#5f6368">«store»</text>
+    <text x="680" y="77" font-size="12" font-weight="600" fill="#8a5a00">Asset catalog</text>
+    <text x="680" y="93" font-size="9" fill="#5f6368">Iceberg/Trino</text>
+
+    <rect x="770" y="42" width="110" height="64" rx="8" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="825" y="58" font-size="9" font-style="italic" fill="#5f6368">«query engine»</text>
+    <text x="825" y="77" font-size="12" font-weight="600" fill="#174ea6">Trino</text>
+    <text x="825" y="93" font-size="9" fill="#5f6368">data path</text>
+  </g>
+
+  <g stroke="#9aa0a6" stroke-width="1" stroke-dasharray="4 4">
+    <line x1="80" y1="106" x2="80" y2="500"/>
+    <line x1="230" y1="106" x2="230" y2="500"/>
+    <line x1="380" y1="106" x2="380" y2="500"/>
+    <line x1="530" y1="106" x2="530" y2="500"/>
+    <line x1="680" y1="106" x2="680" y2="500"/>
+    <line x1="825" y1="106" x2="825" y2="500"/>
+  </g>
+
+  <g stroke="#202124" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="80" y1="150" x2="228" y2="150"/>
+    <line x1="230" y1="190" x2="378" y2="190"/>
+    <line x1="230" y1="240" x2="528" y2="240"/>
+    <line x1="80" y1="290" x2="228" y2="290"/>
+    <line x1="230" y1="340" x2="678" y2="340"/>
+    <line x1="680" y1="390" x2="232" y2="390"/>
+  </g>
+
+  <g font-size="11" fill="#202124">
+    <text x="90" y="142">1 · create metalake + catalogs</text>
+    <text x="240" y="182">2 · list topics (metadata only)</text>
+    <text x="240" y="232">3 · list namespaces/tables (REST backend)</text>
+    <text x="90" y="282">4 · attach tags + custom policies</text>
+    <text x="240" y="332">5 · sync asset_catalog (tables + APIs)</text>
+    <text x="690" y="382" text-anchor="end">6 · asset index available</text>
+  </g>
+
+  <rect x="40" y="430" width="820" height="80" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="58" y="454" font-size="11" fill="#202124">Federation, not ingestion: Gravitino asks Kafka and Polaris for metadata; it does not copy table metadata.</text>
+  <text x="58" y="472" font-size="11" fill="#5f6368">Kafka schemas remain in the domain contract/Schema Registry (D24). API endpoints come from OpenAPI + asset_catalog.</text>
+  <text x="58" y="490" font-size="11" fill="#5f6368">The data path (Kafka → Connect → MinIO → Polaris → Trino) is unchanged; Trino is not routed through Gravitino.</text>
+</svg>

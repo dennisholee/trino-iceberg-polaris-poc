@@ -1,0 +1,44 @@
+<svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Use case E: batch aggregate snapshot from Event Hub">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5f6368"/>
+    </marker>
+    <marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#34a853"/>
+    </marker>
+  </defs>
+  <rect width="900" height="330" fill="#ffffff"/>
+  <text x="40" y="34" font-size="16" font-weight="700" fill="#202124">UC-E · Batch aggregate snapshot</text>
+
+  <g font-size="12" text-anchor="middle">
+    <rect x="30" y="130" width="120" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="90" y="162" font-weight="600" fill="#174ea6">Event Hub</text>
+    <text x="90" y="180" font-size="10" fill="#5f6368">Kafka</text>
+
+    <rect x="170" y="130" width="100" height="76" rx="10" fill="#f1f3f4" stroke="#9aa0a6"/>
+    <text x="220" y="172" font-weight="600" fill="#3c4043">Kafka</text>
+
+    <rect x="290" y="130" width="150" height="76" rx="10" fill="#fef7e0" stroke="#f9ab00"/>
+    <text x="365" y="162" font-weight="600" fill="#8a5a00">Iceberg event log</text>
+    <text x="365" y="180" font-size="10" fill="#5f6368">(bronze)</text>
+
+    <rect x="560" y="130" width="150" height="76" rx="10" fill="#e6f4ea" stroke="#34a853"/>
+    <text x="635" y="162" font-weight="600" fill="#1e7e34">Iceberg snapshot</text>
+    <text x="635" y="180" font-size="10" fill="#5f6368">(gold)</text>
+
+    <rect x="740" y="130" width="120" height="76" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text x="800" y="172" font-weight="600" fill="#174ea6">Trino</text>
+  </g>
+
+  <g stroke="#5f6368" stroke-width="1.5">
+    <line x1="150" y1="168" x2="168" y2="168" marker-end="url(#arrow)"/>
+    <line x1="270" y1="168" x2="288" y2="168" marker-end="url(#arrow)"/>
+    <line x1="710" y1="168" x2="738" y2="168" marker-end="url(#arrow)"/>
+  </g>
+  <line x1="440" y1="168" x2="558" y2="168" stroke="#34a853" stroke-width="2.5" marker-end="url(#green)"/>
+  <text x="499" y="150" text-anchor="middle" font-size="11" font-weight="600" fill="#1e7e34">scheduled MERGE</text>
+  <text x="499" y="188" text-anchor="middle" font-size="10" fill="#5f6368">Trino SQL</text>
+
+  <text x="40" y="262" font-size="11" fill="#5f6368">No streaming runtime. Snapshot rebuilt on a schedule and fully replayable from the log.</text>
+  <text x="40" y="284" font-size="11" fill="#5f6368">Best default: cheapest to run and operate.</text>
+</svg>

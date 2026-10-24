@@ -1,0 +1,53 @@
+<svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" role="img" aria-label="Aggregation bake-off: Iceberg record versus ClickHouse hot view, federated by Trino">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#202124"/>
+    </marker>
+  </defs>
+  <rect width="900" height="520" fill="#ffffff"/>
+  <text x="40" y="30" font-size="15" font-weight="700" fill="#202124">Aggregation bake-off — record vs hot view</text>
+
+  <rect x="40" y="190" width="150" height="82" rx="10" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+  <text x="115" y="212" text-anchor="middle" font-size="9" font-style="italic" fill="#5f6368">«message broker»</text>
+  <text x="115" y="233" text-anchor="middle" font-size="12" font-weight="600" fill="#3c4043">Kafka</text>
+  <text x="115" y="252" text-anchor="middle" font-size="9" fill="#5f6368">event log</text>
+
+  <rect x="280" y="78" width="220" height="82" rx="10" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+  <text x="390" y="100" text-anchor="middle" font-size="9" font-style="italic" fill="#5f6368">«store»</text>
+  <text x="390" y="121" text-anchor="middle" font-size="11" font-weight="700" fill="#1e7e34">Iceberg snapshot_order</text>
+  <text x="390" y="141" text-anchor="middle" font-size="9" fill="#5f6368">record · auditable · portable</text>
+
+  <rect x="530" y="78" width="170" height="82" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="615" y="100" text-anchor="middle" font-size="9" font-style="italic" fill="#5f6368">how</text>
+  <text x="615" y="121" text-anchor="middle" font-size="10" fill="#202124">scheduled Trino MERGE</text>
+  <text x="615" y="139" text-anchor="middle" font-size="9" fill="#5f6368">seq &gt; version</text>
+
+  <rect x="280" y="340" width="220" height="82" rx="10" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="390" y="362" text-anchor="middle" font-size="9" font-style="italic" fill="#5f6368">«store»</text>
+  <text x="390" y="383" text-anchor="middle" font-size="11" font-weight="700" fill="#174ea6">ClickHouse snapshot_order</text>
+  <text x="390" y="403" text-anchor="middle" font-size="9" fill="#5f6368">hot view · sub-second</text>
+
+  <rect x="530" y="340" width="170" height="82" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="615" y="362" text-anchor="middle" font-size="9" font-style="italic" fill="#5f6368">how</text>
+  <text x="615" y="383" text-anchor="middle" font-size="10" fill="#202124">incremental materialized view</text>
+  <text x="615" y="401" text-anchor="middle" font-size="9" fill="#5f6368">FINAL · argMax</text>
+
+  <rect x="740" y="190" width="130" height="120" rx="12" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+  <text x="805" y="216" text-anchor="middle" font-size="9" font-style="italic" fill="#5f6368">«query engine»</text>
+  <text x="805" y="242" text-anchor="middle" font-size="14" font-weight="700" fill="#174ea6">Trino</text>
+  <text x="805" y="262" text-anchor="middle" font-size="9" fill="#5f6368">federates both</text>
+  <text x="805" y="278" text-anchor="middle" font-size="9" fill="#5f6368">the constant</text>
+
+  <g fill="none" stroke="#202124" stroke-width="1.5">
+    <path d="M190,225 L235,225 L235,119 L278,119" marker-end="url(#arrow)"/>
+    <path d="M190,235 L235,235 L235,381 L278,381" marker-end="url(#arrow)"/>
+    <path d="M500,119 L528,119" marker-end="url(#arrow)"/>
+    <path d="M700,119 L720,119 L720,225 L738,225" marker-end="url(#arrow)"/>
+    <path d="M500,381 L528,381" marker-end="url(#arrow)"/>
+    <path d="M700,381 L720,381 L720,275 L738,275" marker-end="url(#arrow)"/>
+  </g>
+
+  <rect x="40" y="452" width="830" height="52" rx="10" fill="#f8f9fa" stroke="#9aa0a6" stroke-dasharray="4 4"/>
+  <text x="58" y="476" font-size="11" fill="#202124">Audit · time travel ✅ Iceberg record        Sub-second serving ✅ ClickHouse hot view</text>
+  <text x="58" y="494" font-size="11" fill="#5f6368">Divergence between the two ⚠ — the risk the bake-off must measure.</text>
+</svg>

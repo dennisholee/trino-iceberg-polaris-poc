@@ -1,0 +1,7 @@
+# Generated build output (Gradle: operational-api)
+.gradle/
+build/
+**/build/
+
+# OS noise
+.DS_Store

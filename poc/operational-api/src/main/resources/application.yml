@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: operational-api
+  datasource:
+    url: ${TRINO_JDBC_URL:jdbc:trino://trino:8080/iceberg/poc}
+    username: ${TRINO_USER:poc}
+    password: ${TRINO_PASSWORD:}
+    driver-class-name: io.trino.jdbc.TrinoDriver
+    hikari:
+      connection-test-query: SELECT 1
+      maximum-pool-size: 4
+
+dq:
+  ge-url: ${DQ_GE_URL:http://gx-dq:8000}
+  asset-id: "GET /v1/orders/{correlationId}"
+  contract-version: orders-api-v1
+  # POC implements the CRITICAL fail-closed path; STANDARD/LOW_RISK are target policy.
+  endpoint-class: CRITICAL
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
